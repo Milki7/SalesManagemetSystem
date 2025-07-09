@@ -13,6 +13,8 @@ public class ProformaInvoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String tenantID;
+
     @Column(name="proforma_id", unique = true)
     private String performaId;
 

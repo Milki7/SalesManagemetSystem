@@ -27,7 +27,7 @@ public class Customer {
     private String tradeName;
 
 
-//    @Column(name = "trade_license_issued_date")
-//    private LocalDate tradeLicenseIssuedDate;
+    @Column(name = "trade_license_issued_date")
+   private LocalDate tradeLicenseIssuedDate;
 
 }
