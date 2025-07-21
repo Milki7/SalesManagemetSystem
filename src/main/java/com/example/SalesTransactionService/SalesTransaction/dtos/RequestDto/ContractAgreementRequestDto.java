@@ -3,6 +3,7 @@ package com.example.SalesTransactionService.SalesTransaction.dtos.RequestDto;
 import com.example.SalesTransactionService.SalesTransaction.enums.ContractAgreementStatus;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
@@ -20,9 +21,17 @@ public class ContractAgreementRequestDto {
     @NotNull(message = "To Date is mandatory")
     private LocalDate toDate;
 
+    @NotNull(message = "Status is required")
+    private Boolean activeStatus;
+
+
+    @Size(max = 100, message = "Agreement document number cannot exceed 100 characters")
     private String agreementDocNo;
+
+    @Size(max = 2000, message = "Description cannot exceed 2000 characters")
     private String description;
-    private String documentPath; // This would typically be a file upload, so the path is set after upload
+
+    byte[] documentContent;
 
     @NotNull(message = "Status is mandatory")
     private ContractAgreementStatus status;

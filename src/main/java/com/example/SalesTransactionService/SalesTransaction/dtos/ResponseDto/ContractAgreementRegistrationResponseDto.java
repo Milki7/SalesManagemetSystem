@@ -5,9 +5,10 @@ import com.example.SalesTransactionService.SalesTransaction.enums.ContractAgreem
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
-public class ContractResponseDto {
+public class ContractAgreementRegistrationResponseDto {
     private Long id;
     private String agreementName;
     private LocalDate agreementDate;
@@ -15,7 +16,14 @@ public class ContractResponseDto {
     private LocalDate toDate;
     private String agreementDocNo;
     private String description;
-    private String documentPath;
     private ContractAgreementStatus status;
 
+    byte[] documentContent;
+
+
+     private Long customerId;
+     private String customerFullName;
+
+    private List<ItemDetailResponseDto> itemServiceDetails;
+    private List<WitnessInformationResponseDto> witnessInformation;
 }

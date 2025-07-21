@@ -1,18 +1,26 @@
-package com.example.SalesTransactionService.SalesTransaction.models;
+package com.example.SalesTransactionService.SalesTransaction.models.AgreementRegistration;
 
 import com.example.SalesTransactionService.SalesTransaction.enums.ContractAgreementStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Data
-@Table(name = "ContractAgreementRegistaration")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "ContractAgreementRegistration")
 public class ContractAgreementRegistration{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,12 +48,23 @@ public class ContractAgreementRegistration{
     @Column(name = "agreement_doc_no")
     private String agreementDocNo;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "descriptions", columnDefinition = "TEXT")
     private String description;
+
+    @Lob
+    @Column
+    private byte[] documentContent;
 
     @Enumerated(EnumType.STRING)
     @Column(name="status" , nullable = false)
     private ContractAgreementStatus status;
 
+    @ManyToMany(mappedBy = "c")
+    private List<ItemDetail> customerInformation= new ArrayList<>();
 
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemDetail> itemDetail = new ArrayList<>();
+
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
+    private List<WitnessInformation> witnesses = new ArrayList<>();
 }
